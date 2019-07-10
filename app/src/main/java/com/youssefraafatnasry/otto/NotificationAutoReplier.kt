@@ -25,9 +25,13 @@ class NotificationAutoReplier : NotificationListenerService() {
 
         // Get proper reply from saved rules
         val text = sbn.notification.extras.get(NotificationCompat.EXTRA_TEXT).toString()
+        val name = sbn.notification.extras.get(NotificationCompat.EXTRA_TITLE).toString().substringBefore(" ")
         val reply: String
         try {
-            reply = Config.RULES.first { text matches it.regex }.fullReply
+            val rule = Config.RULES.first { text matches it.regex }
+            reply = rule.fullReply
+                .replace(ReplyRule.TEXT, text.replace(rule.exclude, "", true))
+                .replace(ReplyRule.NAME, name)
         } catch (e: NoSuchElementException) {
             return
         }
