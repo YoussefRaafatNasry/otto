@@ -20,8 +20,8 @@ class NotificationAutoReplier : NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
 
-        // Ignore ongoing notifications
-        if (!Config.IS_ACTIVE || sbn.isOngoing) return
+        // Ignore ongoing notifications and excluded packages
+        if (!Config.IS_ACTIVE || sbn.isOngoing || sbn.packageName !in Config.PACKAGES) return
 
         // Get proper reply from saved rules
         val text = sbn.notification.extras.get(NotificationCompat.EXTRA_TEXT).toString()

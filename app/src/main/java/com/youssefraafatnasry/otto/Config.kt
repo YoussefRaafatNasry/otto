@@ -8,6 +8,13 @@ class Config {
 
         var PREFIX = "*⦿:* "
 
+        var PACKAGES = arrayOf(
+            "com.facebook.orca",
+            "com.instagram.android",
+            "com.twitter.android",
+            "com.whatsapp"
+        )
+
         var RULES = arrayOf(
             ReplyRule(
                 "hi",
