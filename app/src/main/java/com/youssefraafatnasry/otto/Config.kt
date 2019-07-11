@@ -5,9 +5,8 @@ class Config {
     companion object {
 
         var IS_ACTIVE = false
-
-        var PREFIX = "*⦿:* "
-        var POSTFIX = ""
+        var SPOTIFY_TOKEN: String? = null
+        var OWNER = "Youssef"
 
         var PACKAGES = arrayOf(
             "com.facebook.orca",
@@ -16,13 +15,17 @@ class Config {
             "com.whatsapp"
         )
 
+        var PREFIX = "*⦿:* "
+        var POSTFIX = ""
+
         var RULES = arrayOf(
             ReplyRule(
                 "hi|hey|hello",
-                "Hi, ${ReplyRule.NAME}! I am *Otto*. Youssef created me to talk to people when he's away."
+                "Hi, ${ReplyRule.NAME}! I am *Otto*. " +
+                        "$OWNER created me to talk to people when he's away."
             ),
             ReplyRule(
-                "where('s| is) youssef\\?",
+                "where('s| is) $OWNER\\?",
                 "He is busy teaching me new stuff."
             ),
             ReplyRule(
@@ -46,6 +49,12 @@ class Config {
             ReplyRule(
                 "otto",
                 "Yes?"
+            ),
+            ReplyRule(
+                ".*spotify.+track.+",
+                "I will add this to $OWNER's favourites. " +
+                        "I am sure he will like it!" +
+                        ReplyRule.ADD_TRACK_TO_FAV
             )
         )
 

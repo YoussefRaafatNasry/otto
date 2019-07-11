@@ -24,14 +24,17 @@ class NotificationAutoReplier : NotificationListenerService() {
         if (!Config.IS_ACTIVE || sbn.isOngoing || sbn.packageName !in Config.PACKAGES) return
 
         // Get proper reply from saved rules
-        val text = sbn.notification.extras.get(NotificationCompat.EXTRA_TEXT).toString()
-        val name = sbn.notification.extras.get(NotificationCompat.EXTRA_TITLE).toString().substringBefore(" ")
         val reply: String
         try {
+
+            val text = sbn.notification.extras.get(NotificationCompat.EXTRA_TEXT).toString()
+            val name = sbn.notification.extras.get(NotificationCompat.EXTRA_TITLE).toString()
+                .substringBefore(" ")
+
             val rule = Config.RULES.first { text matches it.regex }
-            reply = rule.fullReply
-                .replace(ReplyRule.TEXT, text.replace(rule.exclude, "", true))
-                .replace(ReplyRule.NAME, name)
+            rule.inputs = hashMapOf(ReplyRule.TEXT to text, ReplyRule.NAME to name)
+            reply = rule.processReply()
+
         } catch (e: NoSuchElementException) {
             return
         }
