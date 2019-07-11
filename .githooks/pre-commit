@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# YoussefRaafatNasry
+# 09/07/2019
+#
+# A hook to make sure that version name is
+# updated in 'app/build.gradle' before each commit.
+
+file_name="app/build.gradle"
+if [ -z $(git diff --exit-code --staged --name-only ${file_name}) ];
+then
+	echo -e "\nUpdate version name in '${file_name}'."
+    echo -e "Last version name was [$(git log --pretty='%s' -1)]\n"
+	exit 1
+fi
