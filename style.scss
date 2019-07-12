@@ -7,6 +7,11 @@ body {
   font-family: Inconsolata;
 }
 
+::selection {
+  background-color: white;
+  color: black;
+}
+
 img {
   width: 64px;
   margin-top: -32px;
