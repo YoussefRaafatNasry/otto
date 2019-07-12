@@ -1,0 +1,44 @@
+- title : Like Spotify Tracks
+  icon  : fab fa-spotify
+  desc  : Send any spotify track URL, and Otto will add it directly to my favorites.
+  impl  : true
+
+- title : Notify with a Beep
+  icon  : fas fa-volume-up
+  desc  : Maybe sometimes you need me <i>URGENTLY</i>, so type <b>otto@beep</b> and he will notify me even if my phone is silent.
+  impl  : true
+
+- title : Answer Questions
+  icon  : fas fa-question-circle
+  desc  : He isn't smart enough yet but he can answer some questions like <b>Where's Youssef?</b> or <b>Who're you?</b>.
+  impl  : true
+
+- title : Repeat Words
+  icon  : fas fa-redo-alt
+  desc  : Tell Otto to <b>say</b> something and he will just say it. This command is helpful to hear whatever you want to hear.
+  impl  : true
+
+- title : Introduce Himself
+  icon  : fas fa-handshake
+  desc  : Send him <b>Hi</b> and he'll reply back telling you who he really is. If you introduced yourself by typing <b>I am X</b>, he would really appreciate it.
+  impl  : true
+
+- title : Send me an Email
+  icon  : fas fa-envelope
+  desc  : Send me a custom e-mail of your choice, as it's the fastest way to reach me nowadays. He can also send me digest e-mails about his activity.
+  impl  : false
+
+- title : Block Third Call
+  icon  : fas fa-phone
+  desc  : Calling me 3 times in a row? He won't allow it. Nothing worth it man!
+  impl  : false
+
+- title : Wake me up
+  icon  : fas fa-bell
+  desc  : Otto can set my alarm to a specific time only if you are a trusted contact.
+  impl  : false
+
+- title : Add Calendar Events
+  icon  : fas fa-calendar-day
+  desc  : If you have a meeting or something soon, ask him to put it on my calendar.
+  impl  : false

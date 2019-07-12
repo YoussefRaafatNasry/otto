@@ -1,0 +1,34 @@
+---
+layout: default
+---
+
+<div class="container px-5 pt-5 animated fadeIn slower">
+
+  <h2 class="col text-center mb-4">What can Otto do?</h2>
+
+  <div class="row">
+    {% for command in site.data.commands %}
+      <div class="col-lg-4 my-4 {% unless command.impl %}text-muted{% endunless %}">
+          <h3><i class="{{ command.icon }}"></i> {{ command.title }}</h3>
+          {{ command.desc }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <h5 class="col text-center mt-4">Supports</h5>
+  <div class="col text-center">
+    <i class="fab fa-whatsapp"></i>
+    <i class="fab fa-twitter"></i>
+    <i class="fab fa-facebook-messenger text-muted"></i>
+    <i class="fab fa-instagram text-muted"></i>
+  </div>
+
+  <a href="{{ site.github.owner_url }}" class="text-decoration-none text-muted">
+    <p class="col text-center mt-3">
+      <small>
+      @{{ site.github.owner_name }}
+      </small>
+    </p>
+  </a>
+
+</div>
