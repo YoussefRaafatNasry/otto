@@ -20,41 +20,41 @@ class Config {
 
         var RULES = arrayOf(
             ReplyRule(
-                "hi|hey|hello",
-                "Hi, ${ReplyRule.NAME}! I am *Otto*. " +
+                "(hi|hey|hello)(.*)",
+                "Hi, ${Template.NAME}! I am *Otto*. " +
                         "$OWNER created me to talk to people when he's away."
             ),
             ReplyRule(
-                "where('s| is) $OWNER\\?",
+                "where('s| is) $OWNER( ?)\\?",
                 "He is busy teaching me new stuff."
             ),
             ReplyRule(
-                "who (r|are) (u|you)\\?",
-                "I'm *Otto*. Who are you?"
+                "who (r|are) (u|you)( ?)\\?",
+                "I'm *Otto*. A piece of code on $OWNER's phone. Who are you?"
             ),
             ReplyRule(
-                "I am .*",
-                "Nice to meet you, ${ReplyRule.TEXT}!",
+                "^I am (\\w+){1}\$",
+                "Nice to meet you, ${Template.TEXT}!",
                 "I am "
             ),
             ReplyRule(
                 "say .*",
-                "${ReplyRule.TEXT}",
+                "${Template.TEXT}",
                 "say "
-            ),
-            ReplyRule(
-                "otto ",
-                "I don't know how to talk much yet but I am learning."
             ),
             ReplyRule(
                 "otto",
                 "Yes?"
             ),
             ReplyRule(
-                ".*spotify.+track.+",
+                "(.*)otto(.*)",
+                "I don't know how to talk much yet but I am learning."
+            ),
+            ReplyRule(
+                "Here’s a song for you|.*spotify.+track.+",
                 "I will add this to $OWNER's favourites. " +
-                        "I am sure he will like it!" +
-                        ReplyRule.ADD_TRACK_TO_FAV
+                        "I am sure he will like it!",
+                command = Command(Command.ADD_TRACK_TO_FAV)
             )
         )
 

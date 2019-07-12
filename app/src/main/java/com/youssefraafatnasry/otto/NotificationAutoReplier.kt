@@ -32,8 +32,10 @@ class NotificationAutoReplier : NotificationListenerService() {
                 .substringBefore(" ")
 
             val rule = Config.RULES.first { text matches it.regex }
-            rule.inputs = hashMapOf(ReplyRule.TEXT to text, ReplyRule.NAME to name)
-            reply = rule.processReply()
+            reply = rule.processReply(hashMapOf(
+                Template.TEXT to text,
+                Template.NAME to name
+            ))
 
         } catch (e: NoSuchElementException) {
             return
