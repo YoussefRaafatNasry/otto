@@ -1,19 +1,33 @@
 package com.youssefraafatnasry.otto
 
-class Command(private val c: String) {
+import android.media.AudioManager
+import android.media.ToneGenerator
 
-    companion object {
-        const val ADD_TRACK_TO_FAV = "{{ ADD_TRACK_TO_FAV }}"
-    }
+enum class Command {
 
-    fun invoke(inputs: HashMap<String, String>) {
-        when (c) {
+    NONE,
+    ADD_TRACK_TO_FAV,
+    NOTIFY_OWNER;
+
+    fun invokeWith(inputs: HashMap<String, String>) {
+
+        when (this) {
+
+            NONE -> { return }
+
             ADD_TRACK_TO_FAV -> {
                 val trackId =
                     SpotifyAPI.getTrackId(inputs[Template.TEXT].toString())
                 SpotifyAPI.likeTrack(trackId)
             }
+
+            NOTIFY_OWNER -> {
+                ToneGenerator(AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME)
+                    .startTone(ToneGenerator.TONE_CDMA_PIP, 1000)
+            }
+
         }
+
     }
 
 }

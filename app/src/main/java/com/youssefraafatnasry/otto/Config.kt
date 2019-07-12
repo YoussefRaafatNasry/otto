@@ -47,14 +47,20 @@ class Config {
                 "Yes?"
             ),
             ReplyRule(
-                "(.*)otto(.*)",
-                "I don't know how to talk much yet but I am learning."
-            ),
-            ReplyRule(
                 "Here’s a song for you|.*spotify.+track.+",
                 "I will add this to $OWNER's favourites. " +
                         "I am sure he will like it!",
-                command = Command(Command.ADD_TRACK_TO_FAV)
+                command = Command.ADD_TRACK_TO_FAV
+            ),
+            ReplyRule(
+                "otto@beep",
+                "This gonna be annoying but I will do it, " +
+                        "I hope $OWNER doesn't shut me down.",
+                command = Command.NOTIFY_OWNER
+            ),
+            ReplyRule(
+                "(.*)otto(.*)",
+                "I don't know how to talk much yet but I am learning."
             )
         )
 
