@@ -53,6 +53,10 @@ class Config {
                 command = Command.ADD_TRACK_TO_FAV
             ),
             ReplyRule(
+                "otto@help",
+                "I cannot do much yet, but here are some stuff I can do for now: ${BuildConfig.WEBSITE}"
+            ),
+            ReplyRule(
                 "otto@beep",
                 "This gonna be annoying but I will do it, " +
                         "I hope $OWNER doesn't shut me down.",
