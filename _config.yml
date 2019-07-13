@@ -3,4 +3,5 @@ title       : otto
 description : Youssef in binary.
 baseurl     : "/otto"
 repository  : YoussefRaafatNasry/otto
-logo        : https://bit.ly/2YO8LAy
+logo        : master/app/src/main/res/mipmap/ic_launcher.png
+meta-img    : gh-pages/meta.png
