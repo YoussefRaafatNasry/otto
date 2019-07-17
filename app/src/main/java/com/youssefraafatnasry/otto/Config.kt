@@ -35,12 +35,12 @@ class Config {
             ReplyRule(
                 "^I am (\\w+){1}\$",
                 "Nice to meet you, ${Template.TEXT}!",
-                "I am "
+                Template.Options("I am ")
             ),
             ReplyRule(
                 "say .*",
                 "${Template.TEXT}",
-                "say "
+                Template.Options("say ")
             ),
             ReplyRule(
                 "otto",
