@@ -7,7 +7,7 @@ class ReplyRule(
     private val command: Command? = null
 ) {
 
-    val regex = Regex(pattern, RegexOption.IGNORE_CASE)
+    val regex = Regex(pattern, setOf(RegexOption.IGNORE_CASE, RegexOption.MULTILINE))
 
     fun processReply(inputs: HashMap<String, String?>): String {
         inputs[Template.CMD_RESULT] = command?.execute(inputs)

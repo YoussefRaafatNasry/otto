@@ -47,7 +47,7 @@ class Config {
                 "Yes?"
             ),
             ReplyRule(
-                "Here’s a song for you|.*spotify.+track.+",
+                ".*spotify.+track.+",
                 "I will add this to $OWNER's favourites. " +
                         "I am sure he will like it!",
                 command = Command.ADD_TRACK_TO_FAV
