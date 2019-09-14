@@ -7,23 +7,12 @@ class SpotifyAPI {
 
     companion object {
 
-        private val mOkHttpClient = OkHttpClient()
-        private var mCall: Call? = null
-
         fun getTrackId(text: String): String {
-
             // Support Spotify URIs (...track:id)
-            // and track http links (...track/id)
-            val trackKeyword = "track"
-            val startIndex = text.indexOf(trackKeyword) + trackKeyword.length + 1
-            val endIndex = text.indexOfAny(" ?".toCharArray(), startIndex)
-
-            return if (endIndex == -1) {
-                text.substring(startIndex)
-            } else {
-                text.substring(startIndex, endIndex)
-            }
-
+            // and HTTP Links (...track/id)
+            val regex = Regex("track[:/].{22}")
+            val match = regex.find(text)!!
+            return match.value.substring(6)
         }
 
         fun likeTrack(id: String) {
@@ -34,13 +23,15 @@ class SpotifyAPI {
                 .method("PUT", RequestBody.create(null, byteArrayOf()))
                 .build()
 
-            mCall = mOkHttpClient.newCall(request)
+            val client = OkHttpClient()
+            val call = client.newCall(request)
+            call?.enqueue(EMPTY_CALLBACK)
 
-            mCall?.enqueue(object : Callback {
-                override fun onResponse(call: Call, response: Response) {}
-                override fun onFailure(call: Call, e: IOException) {}
-            })
+        }
 
+        private val EMPTY_CALLBACK = object : Callback {
+            override fun onFailure(call: Call, e: IOException) {}
+            override fun onResponse(call: Call, response: Response) {}
         }
 
     }
