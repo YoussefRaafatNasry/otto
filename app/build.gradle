@@ -10,11 +10,10 @@ android {
         buildConfigField "String", "SPOTIFY_CLIENT_ID", '"d4fcf53185d04097be9df720025c57c4"'
         buildConfigField "int", "SPOTIFY_AUTH_REQUEST_CODE", "0x10"
         applicationId "com.youssefraafatnasry.otto"
+        versionCode 1
+        versionName "Ox32B"
         minSdkVersion 24
         targetSdkVersion 29
-        versionCode 1
-        versionName "Ox32A"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {

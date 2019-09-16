@@ -7,7 +7,6 @@ import androidx.core.app.NotificationManagerCompat
 import com.spotify.sdk.android.authentication.AuthenticationClient
 import com.spotify.sdk.android.authentication.AuthenticationRequest
 import com.spotify.sdk.android.authentication.AuthenticationResponse
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,10 +23,6 @@ class MainActivity : AppCompatActivity() {
         if (!isListenerAllowed) {
             startActivity(Intent(android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
         }
-
-        // Application active status
-        Config.IS_ACTIVE = switch_activate.isChecked
-        switch_activate.setOnCheckedChangeListener { _, b -> Config.IS_ACTIVE = b }
 
         // Spotify Authentication
         val request = AuthenticationRequest.Builder(
