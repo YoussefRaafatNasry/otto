@@ -23,24 +23,6 @@ class NotificationAutoReplier : NotificationListenerService() {
         // Ignore ongoing notifications and excluded packages
         if (!Config.IS_ACTIVE || sbn.isOngoing || sbn.packageName !in Config.PACKAGES) return
 
-        // Get proper reply from saved rules
-        val reply: String
-        try {
-
-            val text = sbn.notification.extras.get(NotificationCompat.EXTRA_TEXT).toString()
-            val name = sbn.notification.extras.get(NotificationCompat.EXTRA_TITLE).toString()
-                .substringBefore(" ")
-
-            val rule = Config.RULES.first { text matches it.regex }
-            reply = rule.processReply(hashMapOf(
-                Template.TEXT to text,
-                Template.NAME to name
-            ))
-
-        } catch (e: NoSuchElementException) {
-            return
-        }
-
         // A WearableExtender is used to bypass the "Sending reply.." toast
         // when a normal StatusBarNotification is used to invoke actions
         val wearableExtender = NotificationCompat.WearableExtender(sbn.notification)
@@ -49,6 +31,26 @@ class NotificationAutoReplier : NotificationListenerService() {
             replyAction = wearableExtender.actions.first {
                 it != null && it.remoteInputs != null && it.title.contains(REPLY_KEYWORD, true)
             }
+        } catch (e: NoSuchElementException) {
+            return
+        }
+
+        // Get proper reply from saved rules
+        val reply: String
+        try {
+
+            val extras = sbn.notification.extras
+            val text = extras.get(NotificationCompat.EXTRA_TEXT).toString()
+            val name = extras.get(NotificationCompat.EXTRA_TITLE).toString().substringBefore(" ")
+
+            val rule = Config.RULES.first { text matches it.regex }
+            reply = rule.processReply(
+                hashMapOf(
+                    Template.TEXT to text,
+                    Template.NAME to name
+                )
+            )
+
         } catch (e: NoSuchElementException) {
             return
         }
