@@ -1,10 +1,14 @@
-package com.youssefraafatnasry.otto
+package com.youssefraafatnasry.otto.util
+
+import com.youssefraafatnasry.otto.BuildConfig
+import com.youssefraafatnasry.otto.models.Command
+import com.youssefraafatnasry.otto.models.ReplyRule
+import com.youssefraafatnasry.otto.models.Template
 
 class Config {
 
     companion object {
 
-        var IS_ACTIVE = false
         var SPOTIFY_TOKEN: String? = null
         var OWNER = "Youssef"
 

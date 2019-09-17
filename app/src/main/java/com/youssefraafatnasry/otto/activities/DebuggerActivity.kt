@@ -1,4 +1,4 @@
-package com.youssefraafatnasry.otto
+package com.youssefraafatnasry.otto.activities
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -8,12 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.Action
 import androidx.core.app.RemoteInput
+import com.youssefraafatnasry.otto.BuildConfig
+import com.youssefraafatnasry.otto.R
 import kotlinx.android.synthetic.main.activity_debug.*
 
 class DebuggerActivity : AppCompatActivity() {
 
-    private val notificationId = 0x21
-    private val replyKey = "key_reply_text"
+    private val NOTIFICATION_ID = 0x21
+    private val REPLY_KEY = "key_reply_text"
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -31,7 +33,7 @@ class DebuggerActivity : AppCompatActivity() {
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
 
-            val remoteInput = RemoteInput.Builder(replyKey)
+            val remoteInput = RemoteInput.Builder(REPLY_KEY)
                 .setLabel(getString(R.string.enter_message))
                 .build()
 
@@ -42,7 +44,9 @@ class DebuggerActivity : AppCompatActivity() {
             val sender = "Debugger"
             val content = message_edit_text.text.toString()
 
-            val notification = NotificationCompat.Builder(this, BuildConfig.APPLICATION_ID)
+            val notification = NotificationCompat.Builder(this,
+                BuildConfig.APPLICATION_ID
+            )
                 .setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_otto)
                 .setContentTitle(sender)
@@ -53,7 +57,7 @@ class DebuggerActivity : AppCompatActivity() {
                 .build()
 
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.notify(notificationId, notification)
+            notificationManager.notify(NOTIFICATION_ID, notification)
             message_edit_text.text.clear()
             result_text_view.text = getString(R.string.waiting)
 
@@ -64,10 +68,10 @@ class DebuggerActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         val bundle = RemoteInput.getResultsFromIntent(intent)
-        val reply = bundle?.getCharSequence(replyKey).toString()
+        val reply = bundle?.getCharSequence(REPLY_KEY).toString()
         result_text_view.text = reply
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.cancel(notificationId)
+        notificationManager.cancel(NOTIFICATION_ID)
     }
 
 }

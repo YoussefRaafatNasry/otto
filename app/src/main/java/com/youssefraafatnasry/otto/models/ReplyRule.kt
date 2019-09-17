@@ -1,4 +1,6 @@
-package com.youssefraafatnasry.otto
+package com.youssefraafatnasry.otto.models
+
+import com.youssefraafatnasry.otto.util.Config
 
 class ReplyRule(
     pattern: String,
@@ -11,7 +13,11 @@ class ReplyRule(
 
     fun processReply(inputs: HashMap<String, String?>): String {
         inputs[Template.CMD_RESULT] = command?.execute(inputs)
-        return Config.PREFIX + Template.replace(reply, inputs, options) + Config.POSTFIX
+        return Config.PREFIX + Template.replace(
+            reply,
+            inputs,
+            options
+        ) + Config.POSTFIX
     }
 
 }

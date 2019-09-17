@@ -1,4 +1,4 @@
-package com.youssefraafatnasry.otto
+package com.youssefraafatnasry.otto.models
 
 class Template {
 

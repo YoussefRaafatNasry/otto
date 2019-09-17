@@ -1,4 +1,4 @@
-package com.youssefraafatnasry.otto
+package com.youssefraafatnasry.otto.util
 
 import okhttp3.*
 import java.io.IOException
