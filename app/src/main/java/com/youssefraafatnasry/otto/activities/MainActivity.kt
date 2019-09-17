@@ -2,15 +2,13 @@ package com.youssefraafatnasry.otto.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationManagerCompat
 import com.spotify.sdk.android.authentication.AuthenticationClient
 import com.spotify.sdk.android.authentication.AuthenticationRequest
 import com.spotify.sdk.android.authentication.AuthenticationResponse
 import com.youssefraafatnasry.otto.BuildConfig
-import com.youssefraafatnasry.otto.util.Config
 import com.youssefraafatnasry.otto.R
+import com.youssefraafatnasry.otto.util.Config
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        grantNotificationAccess()
         authenticateSpotify()
 
         main_linear_layout.setOnLongClickListener {
@@ -31,15 +28,6 @@ class MainActivity : AppCompatActivity() {
             return@setOnLongClickListener true
         }
 
-    }
-
-    private fun grantNotificationAccess() {
-        val isListenerAllowed = NotificationManagerCompat
-            .getEnabledListenerPackages(this)
-            .contains(BuildConfig.APPLICATION_ID)
-        if (!isListenerAllowed) {
-            startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
-        }
     }
 
     private fun authenticateSpotify() {

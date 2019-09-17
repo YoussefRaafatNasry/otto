@@ -1,26 +1,56 @@
 package com.youssefraafatnasry.otto.services
 
 import android.content.Intent
+import android.provider.Settings
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
-import com.youssefraafatnasry.otto.util.Config
+import androidx.core.app.NotificationManagerCompat.getEnabledListenerPackages
+import com.youssefraafatnasry.otto.BuildConfig
+import com.youssefraafatnasry.otto.util.CustomToast
 
 class MainTileService : TileService() {
+
+    override fun onStartListening() {
+        super.onStartListening()
+        if (!isListenerEnabled()) {
+            updateState(Tile.STATE_INACTIVE)
+        }
+    }
+
+    override fun onStopListening() {
+        super.onStopListening()
+        if (isListenerEnabled()) {
+            updateState(Tile.STATE_ACTIVE)
+        }
+    }
 
     override fun onClick() {
         super.onClick()
         if (qsTile.state == Tile.STATE_INACTIVE) {
+            startSettings("Enable Notification Listener")
             updateState(Tile.STATE_ACTIVE)
-            startService(Intent(this, AutoReplyService::class.java))
         } else {
+            startSettings("Disable Notification Listener")
             updateState(Tile.STATE_INACTIVE)
-            stopService(Intent(this, AutoReplyService::class.java))
         }
     }
 
     private fun updateState(newState: Int) {
         qsTile.state = newState
         qsTile.updateTile()
+    }
+
+    private fun startSettings(message: String) {
+        startActivityAndCollapse(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
+        CustomToast.showToast(
+            this,
+            message,
+            "otto needs the following modifications to complete the requested action."
+        )
+    }
+
+    private fun isListenerEnabled(): Boolean {
+        return getEnabledListenerPackages(this).contains(BuildConfig.APPLICATION_ID)
     }
 
 }
