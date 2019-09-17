@@ -1,11 +1,37 @@
 package com.youssefraafatnasry.otto.util
 
+import android.app.Activity
+import android.content.Intent
+import com.spotify.sdk.android.authentication.AuthenticationClient
+import com.spotify.sdk.android.authentication.AuthenticationRequest
+import com.spotify.sdk.android.authentication.AuthenticationResponse
+import com.youssefraafatnasry.otto.BuildConfig
 import okhttp3.*
 import java.io.IOException
 
 class SpotifyAPI {
 
     companion object {
+
+        private const val CLIENT_ID = "d4fcf53185d04097be9df720025c57c4"
+        private const val AUTH_REQUEST_CODE = 0x10
+        private lateinit var ACCESS_TOKEN: String
+
+        fun authenticateSpotify(context: Activity) {
+            val request = AuthenticationRequest.Builder(
+                CLIENT_ID,
+                AuthenticationResponse.Type.TOKEN,
+                BuildConfig.WEBSITE
+            ).setScopes(arrayOf("user-library-modify")).build()
+            AuthenticationClient.openLoginActivity(context, AUTH_REQUEST_CODE, request)
+        }
+
+        fun initAccessToken(requestCode: Int, resultCode: Int, intent: Intent?) {
+            if (requestCode == AUTH_REQUEST_CODE) {
+                val response = AuthenticationClient.getResponse(resultCode, intent)
+                ACCESS_TOKEN = response?.accessToken.toString()
+            }
+        }
 
         fun getTrackId(text: String): String {
             // Support Spotify URIs (...track:id)
@@ -19,7 +45,7 @@ class SpotifyAPI {
 
             val request = Request.Builder()
                 .url("https://api.spotify.com/v1/me/tracks?ids=$id")
-                .addHeader("Authorization", "Bearer ${Config.SPOTIFY_TOKEN}")
+                .addHeader("Authorization", "Bearer $ACCESS_TOKEN")
                 .method("PUT", RequestBody.create(null, byteArrayOf()))
                 .build()
 

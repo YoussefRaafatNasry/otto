@@ -54,6 +54,7 @@ class DebuggerActivity : AppCompatActivity() {
                 .setContentTitle(sender)
                 .setContentText(content)
                 .setContentIntent(pendingIntent)
+                .setStyle(NotificationCompat.BigTextStyle().bigText(content))
                 .addAction(action)
                 .extend(NotificationCompat.WearableExtender().addAction(action))
                 .build()
@@ -80,7 +81,7 @@ class DebuggerActivity : AppCompatActivity() {
         val boldMatches   = getStyleMatches(text, "*", "b")
         val italicMatches = getStyleMatches(text, "_", "i")
         val stylesMatches = boldMatches + italicMatches
-        val htmlText = stylesMatches.entries.fold(text) { acc, (k, v) -> acc.replace(k, v) }
+        val htmlText      = stylesMatches.entries.fold(text) { acc, (k, v) -> acc.replace(k, v) }
         return HtmlCompat.fromHtml(htmlText, HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 

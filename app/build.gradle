@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.youssefraafatnasry.otto"
         versionCode 1
-        versionName "Ox32F"
+        versionName "Ox32G"
         minSdkVersion 24
         targetSdkVersion 29
         buildConfigField "String", "WEBSITE", '"https://youssefraafatnasry.github.io/otto/"'

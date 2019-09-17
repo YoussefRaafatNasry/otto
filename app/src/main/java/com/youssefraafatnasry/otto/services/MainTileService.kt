@@ -1,26 +1,23 @@
 package com.youssefraafatnasry.otto.services
 
 import android.content.Intent
+import android.graphics.drawable.Icon
 import android.provider.Settings
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import androidx.core.app.NotificationManagerCompat.getEnabledListenerPackages
 import com.youssefraafatnasry.otto.BuildConfig
+import com.youssefraafatnasry.otto.R
 import com.youssefraafatnasry.otto.util.CustomToast
 
 class MainTileService : TileService() {
 
     override fun onStartListening() {
         super.onStartListening()
-        if (!isListenerEnabled()) {
-            updateState(Tile.STATE_INACTIVE)
-        }
-    }
-
-    override fun onStopListening() {
-        super.onStopListening()
         if (isListenerEnabled()) {
             updateState(Tile.STATE_ACTIVE)
+        } else {
+            updateState(Tile.STATE_INACTIVE)
         }
     }
 
@@ -36,6 +33,11 @@ class MainTileService : TileService() {
     }
 
     private fun updateState(newState: Int) {
+        val iconId = when (newState) {
+            Tile.STATE_ACTIVE -> R.drawable.ic_otto
+            else -> R.drawable.ic_otto_disabled
+        }
+        qsTile.icon = Icon.createWithResource(this, iconId)
         qsTile.state = newState
         qsTile.updateTile()
     }

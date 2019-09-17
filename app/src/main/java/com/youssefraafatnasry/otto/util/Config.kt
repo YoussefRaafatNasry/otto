@@ -9,8 +9,9 @@ class Config {
 
     companion object {
 
-        var SPOTIFY_TOKEN: String? = null
-        var OWNER = "Youssef"
+        var OWNER   = "Youssef"
+        var PREFIX  = "*⦿:* "
+        var POSTFIX = ""
 
         var PACKAGES = arrayOf(
             BuildConfig.APPLICATION_ID, // For debugging mode
@@ -19,9 +20,6 @@ class Config {
             "com.twitter.android",
             "com.whatsapp"
         )
-
-        var PREFIX = "*⦿:* "
-        var POSTFIX = ""
 
         var RULES = arrayOf(
             ReplyRule(
