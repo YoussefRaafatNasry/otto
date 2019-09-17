@@ -7,6 +7,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.spotify.sdk.android.authentication.AuthenticationClient
 import com.spotify.sdk.android.authentication.AuthenticationRequest
 import com.spotify.sdk.android.authentication.AuthenticationResponse
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         ).setScopes(arrayOf("user-library-modify")).build()
         AuthenticationClient.openLoginActivity(this, BuildConfig.SPOTIFY_AUTH_REQUEST_CODE, request)
 
+        main_linear_layout.setOnLongClickListener {
+            val intent = Intent(this@MainActivity, DebuggerActivity::class.java)
+            startActivity(intent)
+            return@setOnLongClickListener true
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {

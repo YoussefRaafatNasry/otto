@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.youssefraafatnasry.otto">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.youssefraafatnasry.otto">
 
     <application
             android:allowBackup="true"
@@ -13,15 +13,21 @@
 
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <service android:name=".NotificationAutoReplier"
-                 android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+        <activity
+                android:name=".DebuggerActivity"
+                android:launchMode="singleTop" />
+
+        <service
+                android:name=".NotificationAutoReplier"
+                android:enabled="true"
+                android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
-                <action android:name="android.service.notification.NotificationListenerService"/>
+                <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
 

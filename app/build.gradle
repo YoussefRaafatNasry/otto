@@ -11,7 +11,7 @@ android {
         buildConfigField "int", "SPOTIFY_AUTH_REQUEST_CODE", "0x10"
         applicationId "com.youssefraafatnasry.otto"
         versionCode 1
-        versionName "Ox32B"
+        versionName "Ox32C"
         minSdkVersion 24
         targetSdkVersion 29
     }

@@ -9,6 +9,7 @@ class Config {
         var OWNER = "Youssef"
 
         var PACKAGES = arrayOf(
+            BuildConfig.APPLICATION_ID, // For debugging mode
             "com.facebook.orca",
             "com.instagram.android",
             "com.twitter.android",

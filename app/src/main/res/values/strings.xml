@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">otto</string>
     <string name="instructions">Add quick settings tile to enable otto</string>
+    <string name="debugging_mode">[Debugging Mode]</string>
+    <string name="send">Send</string>
+    <string name="enter_message">Enter Message…</string>
+    <string name="waiting">Waiting…</string>
 </resources>

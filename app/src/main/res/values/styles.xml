@@ -7,7 +7,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:background">@color/colorPrimary</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/colorWhite50</item>
+        <item name="android:editTextColor">@color/colorAccent</item>
     </style>
 
 </resources>
