@@ -4,10 +4,12 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
+import android.text.Spanned
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.Action
 import androidx.core.app.RemoteInput
+import androidx.core.text.HtmlCompat
 import com.youssefraafatnasry.otto.BuildConfig
 import com.youssefraafatnasry.otto.R
 import kotlinx.android.synthetic.main.activity_debug.*
@@ -23,6 +25,9 @@ class DebuggerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_debug)
 
         send_button.setOnClickListener {
+
+            if (message_edit_text.text.isEmpty())
+                return@setOnClickListener
 
             val resultIntent = Intent(this@DebuggerActivity, DebuggerActivity::class.java)
 
@@ -41,12 +46,9 @@ class DebuggerActivity : AppCompatActivity() {
                 .addRemoteInput(remoteInput)
                 .build()
 
-            val sender = "Debugger"
+            val sender  = "Debugger"
             val content = message_edit_text.text.toString()
-
-            val notification = NotificationCompat.Builder(this,
-                BuildConfig.APPLICATION_ID
-            )
+            val notification = NotificationCompat.Builder(this, BuildConfig.APPLICATION_ID)
                 .setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_otto)
                 .setContentTitle(sender)
@@ -69,9 +71,27 @@ class DebuggerActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         val bundle = RemoteInput.getResultsFromIntent(intent)
         val reply = bundle?.getCharSequence(REPLY_KEY).toString()
-        result_text_view.text = reply
+        result_text_view.text = formatText(reply)
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.cancel(NOTIFICATION_ID)
+    }
+
+    private fun formatText(text: String): Spanned {
+        val boldMatches   = getStyleMatches(text, "*", "b")
+        val italicMatches = getStyleMatches(text, "_", "i")
+        val stylesMatches = boldMatches + italicMatches
+        val htmlText = stylesMatches.entries.fold(text) { acc, (k, v) -> acc.replace(k, v) }
+        return HtmlCompat.fromHtml(htmlText, HtmlCompat.FROM_HTML_MODE_LEGACY)
+    }
+
+    private fun getStyleMatches(
+        text: String,
+        delimiter: String,
+        htmlTag: String
+    ): Map<String, String> {
+        val regex = Regex("\\$delimiter.+?\\$delimiter")
+        val matches = regex.findAll(text).map { it.value }
+        return matches.associateWith { "<$htmlTag>${it.substring(1, it.lastIndex)}</$htmlTag>" }
     }
 
 }
