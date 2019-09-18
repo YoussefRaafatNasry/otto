@@ -3,6 +3,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         package="com.youssefraafatnasry.otto">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
             android:allowBackup="true"
             android:icon="@drawable/ic_otto"
@@ -22,6 +24,8 @@
                 android:name=".activities.DebuggerActivity"
                 android:launchMode="singleTop" />
 
+        <activity android:name=".activities.RulesActivity" />
+
         <service
                 android:name=".services.AutoReplyService"
                 android:enabled="true"
@@ -30,7 +34,6 @@
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
-
         <service
                 android:name=".services.MainTileService"
                 android:enabled="true"
@@ -41,7 +44,6 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

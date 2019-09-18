@@ -1,30 +1,30 @@
 package com.youssefraafatnasry.otto.models
 
-class Template {
+object Template {
 
-    class Options(val exclude: String = "")
+    class Options(val exclude: String = "") {
+        override fun toString(): String {
+            return "exclude: '$exclude'"
+        }
+    }
 
-    companion object {
+    const val TEXT = "{{ TEXT }}"
+    const val NAME = "{{ NAME }}"
+    const val CMD_RESULT = "{{ CMD_RESULT }}"
 
-        const val TEXT = "{{ TEXT }}"
-        const val NAME = "{{ NAME }}"
-        const val CMD_RESULT = "{{ CMD_RESULT }}"
+    fun replace(reply: String, inputs: HashMap<String, String?>, options: Options?): String {
 
-        fun replace(reply: String, inputs: HashMap<String, String?>, options: Options?): String {
+        var copy = reply
 
-            var copy = reply
-
-            inputs.forEach { (k, v) ->
-                copy = copy.replace(k, v.toString(), true)
-            }
-
-            if (options != null) {
-                copy =  copy.replace(options.exclude, "", true)
-            }
-
-            return copy
+        inputs.forEach { (k, v) ->
+            copy = copy.replace(k, v.toString(), true)
         }
 
+        if (options != null) {
+            copy = copy.replace(options.exclude, "", true)
+        }
+
+        return copy
     }
 
 }

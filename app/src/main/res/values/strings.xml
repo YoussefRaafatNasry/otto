@@ -5,4 +5,6 @@
     <string name="send">Send</string>
     <string name="enter_message">Enter Message…</string>
     <string name="waiting">Waiting…</string>
+    <string name="command">Command:\u0020</string>
+    <string name="template">Template:\u0020</string>
 </resources>

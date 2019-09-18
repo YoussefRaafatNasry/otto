@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.youssefraafatnasry.otto"
         versionCode 1
-        versionName "Ox32H"
+        versionName "Ox330"
         minSdkVersion 24
         targetSdkVersion 29
         buildConfigField "String", "WEBSITE", '"https://youssefraafatnasry.github.io/otto/"'
@@ -26,6 +26,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.spotify.sdk:spotify-auth:1.1.0@aar'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 }

@@ -7,8 +7,8 @@ import com.youssefraafatnasry.otto.models.Template
 
 object Config {
 
-    var OWNER   = "Youssef"
-    var PREFIX  = "*⦿:* "
+    var OWNER = "Youssef"
+    var PREFIX = "*⦿:* "
     var POSTFIX = ""
 
     var PACKAGES = arrayOf(
@@ -21,16 +21,19 @@ object Config {
 
     var RULES = arrayOf(
         ReplyRule(
-            "(hi|hey|hello)(.*)",
-            "Hi, ${Template.NAME}! I am *Otto*. " +
-                    "$OWNER created me to talk to people when he's away."
+            "(hi|hello|he+y).*",
+            "Hi, ${Template.NAME}! I am *Otto*. $OWNER created me to talk to people when he's away."
         ),
         ReplyRule(
-            "where('s| is) $OWNER( ?)\\?",
+            "how (are|r) (you|u).*",
+            "I am feeling a 'bit' down, but I hope $OWNER is doing fine!"
+        ),
+        ReplyRule(
+            "where('s| is) $OWNER.*",
             "He is busy teaching me new stuff."
         ),
         ReplyRule(
-            "who (r|are) (u|you)( ?)\\?",
+            "who (are|r) (you|u).*",
             "I'm *Otto*. A piece of code on $OWNER's phone. Who are you?"
         ),
         ReplyRule(
@@ -40,31 +43,29 @@ object Config {
         ),
         ReplyRule(
             "say .*",
-            "${Template.TEXT}",
+            "${Template.TEXT}.",
             Template.Options("say ")
         ),
         ReplyRule(
-            "otto",
-            "Yes?"
+            ".*spotify.+track.+",
+            "I will add this to $OWNER's favourites. I am sure he will like it!",
+            command = Command.ADD_TRACK_TO_FAV
         ),
         ReplyRule(
-            ".*spotify.+track.+",
-            "I will add this to $OWNER's favourites. " +
-                    "I am sure he will like it!",
-            command = Command.ADD_TRACK_TO_FAV
+            "otto@beep",
+            "This gonna be annoying but I will do it, I hope $OWNER doesn't shut me down.",
+            command = Command.NOTIFY_OWNER
         ),
         ReplyRule(
             "otto@help",
             "I cannot do much yet, but here are some stuff I can do for now: ${BuildConfig.WEBSITE}"
         ),
         ReplyRule(
-            "otto@beep",
-            "This gonna be annoying but I will do it, " +
-                    "I hope $OWNER doesn't shut me down.",
-            command = Command.NOTIFY_OWNER
+            "otto",
+            "Yes?"
         ),
         ReplyRule(
-            "(.*)otto(.*)",
+            ".*otto.*",
             "I don't know how to talk much yet but I am learning."
         )
     )

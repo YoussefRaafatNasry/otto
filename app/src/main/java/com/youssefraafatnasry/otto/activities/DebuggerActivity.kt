@@ -5,7 +5,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.os.Vibrator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.Action
@@ -19,7 +19,6 @@ import com.youssefraafatnasry.otto.util.TextFormatter.appendTextFormatted
 import com.youssefraafatnasry.otto.util.TextFormatter.setTextFormatted
 import kotlinx.android.synthetic.main.activity_debug.*
 
-
 class DebuggerActivity : AppCompatActivity() {
 
     private val NOTIFICATION_ID = 0x21
@@ -31,18 +30,23 @@ class DebuggerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_debug)
 
         send_button.setOnClickListener {
+            vibrate()
             sendMessage()
         }
 
         rules_button.setOnClickListener {
-            Toast.makeText(this@DebuggerActivity, "Not Implemented yet!", Toast.LENGTH_SHORT).show()
+            vibrate()
+            val intent = Intent(this@DebuggerActivity, RulesActivity::class.java)
+            startActivity(intent)
         }
 
         spotify_button.setOnClickListener {
+            vibrate()
             verifySpotify()
         }
 
         notifications_button.setOnClickListener {
+            vibrate()
             verifyService()
         }
 
@@ -55,6 +59,11 @@ class DebuggerActivity : AppCompatActivity() {
         val nManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         nManager.cancel(NOTIFICATION_ID)
         result_text_view.setTextFormatted(reply)
+    }
+
+    private fun vibrate() {
+        val vibe = getSystemService(VIBRATOR_SERVICE) as Vibrator
+        vibe.vibrate(25)
     }
 
     private fun sendMessage() {

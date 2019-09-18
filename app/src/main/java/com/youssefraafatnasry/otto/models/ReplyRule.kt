@@ -2,11 +2,11 @@ package com.youssefraafatnasry.otto.models
 
 import com.youssefraafatnasry.otto.util.Config
 
-class ReplyRule(
-    pattern: String,
-    private val reply: String,
-    private val options: Template.Options? = null,
-    private val command: Command? = null
+data class ReplyRule(
+    val pattern: String,
+    val reply: String,
+    val options: Template.Options? = null,
+    val command: Command? = null
 ) {
 
     val regex = Regex(pattern, setOf(RegexOption.IGNORE_CASE, RegexOption.DOT_MATCHES_ALL))
