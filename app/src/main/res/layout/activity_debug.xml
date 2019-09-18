@@ -35,8 +35,43 @@
     <TextView
             android:id="@+id/result_text_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="40dp"
+            android:layout_weight="1"
             android:autoLink="web" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+        <ImageButton
+                android:id="@+id/rules_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:padding="4dp"
+                android:src="@drawable/ic_info" />
+
+        <ImageButton
+                android:id="@+id/spotify_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:padding="4dp"
+                android:src="@drawable/ic_spotify" />
+
+        <ImageButton
+                android:id="@+id/notifications_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:padding="4dp"
+                android:src="@drawable/ic_notifications" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.youssefraafatnasry.otto.services
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
 import android.provider.Settings
@@ -14,7 +15,7 @@ class MainTileService : TileService() {
 
     override fun onStartListening() {
         super.onStartListening()
-        if (isListenerEnabled()) {
+        if (isListenerEnabled(this)) {
             updateState(Tile.STATE_ACTIVE)
         } else {
             updateState(Tile.STATE_INACTIVE)
@@ -51,8 +52,10 @@ class MainTileService : TileService() {
         )
     }
 
-    private fun isListenerEnabled(): Boolean {
-        return getEnabledListenerPackages(this).contains(BuildConfig.APPLICATION_ID)
+    companion object {
+        fun isListenerEnabled(context: Context): Boolean {
+            return getEnabledListenerPackages(context).contains(BuildConfig.APPLICATION_ID)
+        }
     }
 
 }
