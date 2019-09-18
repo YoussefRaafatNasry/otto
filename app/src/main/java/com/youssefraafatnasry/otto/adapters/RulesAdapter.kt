@@ -21,7 +21,7 @@ class RulesAdapter(private val rules: Array<ReplyRule>) : RecyclerView.Adapter<R
 
         val rule = rules[position]
         holder.patternTextView.text = rule.pattern
-        holder.replyTextView.text   = rule.reply
+        holder.replyTextView.text   = rule.replies.joinToString("\n— or —\n")
 
         if (rule.options == null) {
             holder.templateLayout.visibility = View.GONE
