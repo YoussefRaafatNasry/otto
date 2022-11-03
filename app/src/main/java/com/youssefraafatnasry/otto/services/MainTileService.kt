@@ -44,7 +44,10 @@ class MainTileService : TileService() {
     }
 
     private fun startSettings(message: String) {
-        startActivityAndCollapse(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
+        val intent = Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivityAndCollapse(intent)
+
         CustomToast.showToast(
             this,
             message,

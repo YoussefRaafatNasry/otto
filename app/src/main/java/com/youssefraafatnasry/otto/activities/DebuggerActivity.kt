@@ -1,11 +1,14 @@
 package com.youssefraafatnasry.otto.activities
 
 import android.app.ActivityManager
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.Action
@@ -19,8 +22,9 @@ import com.youssefraafatnasry.otto.util.TextFormatter.appendTextFormatted
 import com.youssefraafatnasry.otto.util.TextFormatter.setTextFormatted
 import kotlinx.android.synthetic.main.activity_debug.*
 
-class DebuggerActivity : AppCompatActivity() {
 
+class DebuggerActivity : AppCompatActivity() {
+    private val NOTIFICATION_CHANNEL_ID = "DBG_CHNL"
     private val NOTIFICATION_ID = 0x21
     private val REPLY_KEY       = "key_reply_text"
 
@@ -66,6 +70,7 @@ class DebuggerActivity : AppCompatActivity() {
         vibe.vibrate(25)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun sendMessage() {
 
         if (message_edit_text.text.isEmpty())
@@ -96,12 +101,20 @@ class DebuggerActivity : AppCompatActivity() {
             .setContentTitle(sender)
             .setContentText(content)
             .setContentIntent(pendingIntent)
+            .setChannelId(NOTIFICATION_CHANNEL_ID)
             .addAction(action)
             .extend(NotificationCompat.WearableExtender().addAction(action))
             .setStyle(NotificationCompat.BigTextStyle().bigText(content))
             .build()
 
+        val notificationChannel = NotificationChannel(
+            NOTIFICATION_CHANNEL_ID,
+            "Debug Notification",
+            NotificationManager.IMPORTANCE_HIGH
+        )
+
         val nManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        nManager.createNotificationChannel(notificationChannel)
         nManager.notify(NOTIFICATION_ID, notification)
         message_edit_text.text.clear()
         result_text_view.text = getString(R.string.waiting)
