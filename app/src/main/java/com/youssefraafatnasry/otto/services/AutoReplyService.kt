@@ -7,8 +7,8 @@ import android.service.notification.StatusBarNotification
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.Action
 import androidx.core.app.RemoteInput
-import com.youssefraafatnasry.otto.util.Config
 import com.youssefraafatnasry.otto.models.Template
+import com.youssefraafatnasry.otto.util.Config
 
 class AutoReplyService : NotificationListenerService() {
 
@@ -28,10 +28,10 @@ class AutoReplyService : NotificationListenerService() {
 
         // Get proper reply from saved rules
         val extras = sbn.notification.extras
-        val text   = extras.get(NotificationCompat.EXTRA_TEXT).toString()
-        val name   = extras.get(NotificationCompat.EXTRA_TITLE).toString().substringBefore(" ")
-        val rule   = Config.RULES.firstOrNull { text matches it.regex } ?: return
-        val reply  = rule.processReply(
+        val text = extras.get(NotificationCompat.EXTRA_TEXT).toString()
+        val name = extras.get(NotificationCompat.EXTRA_TITLE).toString().substringBefore(" ")
+        val rule = Config.RULES.firstOrNull { text matches it.regex } ?: return
+        val reply = rule.processReply(
             hashMapOf(
                 Template.TEXT to text,
                 Template.NAME to name

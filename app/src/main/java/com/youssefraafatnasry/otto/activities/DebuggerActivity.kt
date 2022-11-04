@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.activity_debug.*
 class DebuggerActivity : AppCompatActivity() {
     private val NOTIFICATION_CHANNEL_ID = "DBG_CHNL"
     private val NOTIFICATION_ID = 0x21
-    private val REPLY_KEY       = "key_reply_text"
+    private val REPLY_KEY = "key_reply_text"
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -58,8 +58,8 @@ class DebuggerActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        val bundle   = RemoteInput.getResultsFromIntent(intent)
-        val reply    = bundle?.getCharSequence(REPLY_KEY).toString()
+        val bundle = RemoteInput.getResultsFromIntent(intent)
+        val reply = bundle?.getCharSequence(REPLY_KEY).toString()
         val nManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         nManager.cancel(NOTIFICATION_ID)
         result_text_view.setTextFormatted(reply)
@@ -93,8 +93,8 @@ class DebuggerActivity : AppCompatActivity() {
             .addRemoteInput(remoteInput)
             .build()
 
-        val sender       = "Debugger"
-        val content      = message_edit_text.text.toString()
+        val sender = "Debugger"
+        val content = message_edit_text.text.toString()
         val notification = NotificationCompat.Builder(this, BuildConfig.APPLICATION_ID)
             .setAutoCancel(true)
             .setSmallIcon(R.drawable.ic_otto_black)

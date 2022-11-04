@@ -7,7 +7,7 @@ data class ReplyRule(
     val replies: ArrayList<String>,
     val options: Template.Options? = null,
     val command: Command? = null
-    ) {
+) {
 
     val regex = Regex(pattern, setOf(RegexOption.IGNORE_CASE, RegexOption.DOT_MATCHES_ALL))
 

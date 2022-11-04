@@ -13,7 +13,7 @@ object SpotifyAPI {
 
     lateinit var ACCESS_TOKEN: String
     private const val AUTH_REQUEST_CODE = 0x10
-    private const val CLIENT_ID         = "d4fcf53185d04097be9df720025c57c4"
+    private const val CLIENT_ID = "d4fcf53185d04097be9df720025c57c4"
 
     fun authenticateSpotify(context: Activity) {
         val request = AuthenticationRequest.Builder(
@@ -48,7 +48,7 @@ object SpotifyAPI {
             .build()
 
         val client = OkHttpClient()
-        val call   = client.newCall(request)
+        val call = client.newCall(request)
         call?.enqueue(EMPTY_CALLBACK)
 
     }

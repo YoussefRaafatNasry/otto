@@ -1,7 +1,7 @@
 package com.youssefraafatnasry.otto.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.youssefraafatnasry.otto.adapters.RulesAdapter
 import com.youssefraafatnasry.otto.util.Config

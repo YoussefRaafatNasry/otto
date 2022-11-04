@@ -21,7 +21,7 @@ class RulesAdapter(private val rules: Array<ReplyRule>) : RecyclerView.Adapter<R
 
         val rule = rules[position]
         holder.patternTextView.text = rule.pattern
-        holder.replyTextView.text   = rule.replies.joinToString("\n— or —\n")
+        holder.replyTextView.text = rule.replies.joinToString("\n— or —\n")
 
         if (rule.options == null) {
             holder.templateLayout.visibility = View.GONE
@@ -40,12 +40,13 @@ class RulesAdapter(private val rules: Array<ReplyRule>) : RecyclerView.Adapter<R
     }
 
     inner class RuleHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        internal var patternTextView:    TextView = itemView.findViewById(R.id.pattern_text_view)
-        internal var replyTextView:      TextView = itemView.findViewById(R.id.reply_text_view)
-        internal var templateTextView:   TextView = itemView.findViewById(R.id.template_text_view)
-        internal var commandTextView:    TextView = itemView.findViewById(R.id.command_text_view)
-        internal var templateLayout: LinearLayout = itemView.findViewById(R.id.template_linear_layout)
-        internal var commandLayout:  LinearLayout = itemView.findViewById(R.id.command_linear_layout)
+        internal var patternTextView: TextView = itemView.findViewById(R.id.pattern_text_view)
+        internal var replyTextView: TextView = itemView.findViewById(R.id.reply_text_view)
+        internal var templateTextView: TextView = itemView.findViewById(R.id.template_text_view)
+        internal var commandTextView: TextView = itemView.findViewById(R.id.command_text_view)
+        internal var templateLayout: LinearLayout =
+            itemView.findViewById(R.id.template_linear_layout)
+        internal var commandLayout: LinearLayout = itemView.findViewById(R.id.command_linear_layout)
     }
 
 }

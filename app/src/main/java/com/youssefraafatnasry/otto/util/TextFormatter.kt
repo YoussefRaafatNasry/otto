@@ -15,10 +15,10 @@ object TextFormatter {
     }
 
     private fun formatText(text: String): Spanned {
-        val boldMatches   = getStyleMatches(text, "*", "b")
+        val boldMatches = getStyleMatches(text, "*", "b")
         val italicMatches = getStyleMatches(text, "_", "i")
         val stylesMatches = boldMatches + italicMatches + ("\n" to "<br>")
-        val htmlText      = stylesMatches.entries.fold(text) { acc, (k, v) -> acc.replace(k, v) }
+        val htmlText = stylesMatches.entries.fold(text) { acc, (k, v) -> acc.replace(k, v) }
         return HtmlCompat.fromHtml(htmlText, HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 
@@ -27,7 +27,7 @@ object TextFormatter {
         delimiter: String,
         htmlTag: String
     ): Map<String, String> {
-        val regex   = Regex("\\$delimiter.+?\\$delimiter")
+        val regex = Regex("\\$delimiter.+?\\$delimiter")
         val matches = regex.findAll(text).map { it.value }
         return matches.associateWith { "<$htmlTag>${it.substring(1, it.lastIndex)}</$htmlTag>" }
     }
