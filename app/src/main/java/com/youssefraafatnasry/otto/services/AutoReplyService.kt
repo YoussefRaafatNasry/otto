@@ -43,9 +43,10 @@ class AutoReplyService : NotificationListenerService() {
     }
 
     private fun replyToNotification(bundle: Bundle, action: Action, reply: String) {
+        if (action.remoteInputs == null) return;
         val intent = Intent()
-        action.remoteInputs.forEach { bundle.putCharSequence(it.resultKey, reply) }
-        RemoteInput.addResultsToIntent(action.remoteInputs, intent, bundle)
+        action.remoteInputs!!.forEach { bundle.putCharSequence(it.resultKey, reply) }
+        RemoteInput.addResultsToIntent(action.remoteInputs!!, intent, bundle)
         action.actionIntent.send(applicationContext, 0, intent)
     }
 
