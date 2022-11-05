@@ -1,21 +1,31 @@
-package com.youssefraafatnasry.otto.services
+package dev.yrn.otto.service
 
+import android.app.Activity
+import android.app.ActivityManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.Action
 import androidx.core.app.RemoteInput
-import com.youssefraafatnasry.otto.models.Template
-import com.youssefraafatnasry.otto.util.Config
+
+import dev.yrn.otto.models.Template
+import dev.yrn.otto.Config
 
 class AutoReplyService : NotificationListenerService() {
-
-    private val REPLY_KEYWORD = "reply"
+    companion object {
+        fun isRunning(activity: Activity): Boolean {
+            val manager = activity.getSystemService(ACTIVITY_SERVICE) as ActivityManager
+            return manager.getRunningServices(Integer.MAX_VALUE).any {
+                it.service.className == AutoReplyService::class.java.name
+            }
+        }
+    }
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
-
         // Ignore ongoing notifications and excluded packages
         if (sbn.isOngoing || sbn.packageName !in Config.PACKAGES) return
 
@@ -23,7 +33,7 @@ class AutoReplyService : NotificationListenerService() {
         // when a normal StatusBarNotification is used to invoke actions
         val wearableExtender = NotificationCompat.WearableExtender(sbn.notification)
         val replyAction = wearableExtender.actions.firstOrNull {
-            it?.remoteInputs != null && it.title.contains(REPLY_KEYWORD, true)
+            it?.remoteInputs != null && it.title.contains( "reply", true)
         } ?: return
 
         // Get proper reply from saved rules
@@ -39,7 +49,6 @@ class AutoReplyService : NotificationListenerService() {
         )
 
         replyToNotification(sbn.notification.extras, replyAction, reply)
-
     }
 
     private fun replyToNotification(bundle: Bundle, action: Action, reply: String) {
@@ -49,5 +58,4 @@ class AutoReplyService : NotificationListenerService() {
         RemoteInput.addResultsToIntent(action.remoteInputs!!, intent, bundle)
         action.actionIntent.send(applicationContext, 0, intent)
     }
-
 }

@@ -1,4 +1,4 @@
-package com.youssefraafatnasry.otto.services
+package dev.yrn.otto.service
 
 import android.content.Context
 import android.content.Intent
@@ -6,12 +6,17 @@ import android.graphics.drawable.Icon
 import android.provider.Settings
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
+import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat.getEnabledListenerPackages
-import com.youssefraafatnasry.otto.BuildConfig
-import com.youssefraafatnasry.otto.R
-import com.youssefraafatnasry.otto.util.CustomToast
+import dev.yrn.otto.BuildConfig
+import dev.yrn.otto.R
 
 class MainTileService : TileService() {
+    companion object {
+        fun isListenerEnabled(context: Context): Boolean {
+            return getEnabledListenerPackages(context).contains(BuildConfig.APPLICATION_ID)
+        }
+    }
 
     override fun onStartListening() {
         super.onStartListening()
@@ -48,17 +53,11 @@ class MainTileService : TileService() {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivityAndCollapse(intent)
 
-        CustomToast.showToast(
+        Toast.makeText(
             this,
             message,
-            "otto needs the following modifications to complete the requested action."
-        )
-    }
-
-    companion object {
-        fun isListenerEnabled(context: Context): Boolean {
-            return getEnabledListenerPackages(context).contains(BuildConfig.APPLICATION_ID)
-        }
+            Toast.LENGTH_LONG
+        ).show()
     }
 
 }

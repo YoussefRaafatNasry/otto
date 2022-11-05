@@ -1,9 +1,9 @@
-package com.youssefraafatnasry.otto.util
+package dev.yrn.otto
 
-import com.youssefraafatnasry.otto.BuildConfig
-import com.youssefraafatnasry.otto.models.Command
-import com.youssefraafatnasry.otto.models.ReplyRule
-import com.youssefraafatnasry.otto.models.Template
+import dev.yrn.otto.models.Command
+import dev.yrn.otto.models.ReplyRule
+import dev.yrn.otto.models.Template
+
 
 object Config {
 

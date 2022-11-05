@@ -1,6 +1,6 @@
-package com.youssefraafatnasry.otto.models
+package dev.yrn.otto.models
 
-import com.youssefraafatnasry.otto.util.Config
+import dev.yrn.otto.Config
 
 data class ReplyRule(
     val pattern: String,
@@ -8,7 +8,6 @@ data class ReplyRule(
     val options: Template.Options? = null,
     val command: Command? = null
 ) {
-
     val regex = Regex(pattern, setOf(RegexOption.IGNORE_CASE, RegexOption.DOT_MATCHES_ALL))
 
     fun processReply(inputs: HashMap<String, String?>): String {
@@ -16,5 +15,4 @@ data class ReplyRule(
         val reply = Template.replace(replies.random(), inputs, options)
         return Config.PREFIX + reply + Config.POSTFIX
     }
-
 }

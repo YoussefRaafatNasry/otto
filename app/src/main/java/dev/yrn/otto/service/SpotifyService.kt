@@ -1,17 +1,17 @@
-package com.youssefraafatnasry.otto.util
+package dev.yrn.otto.service
 
 import android.app.Activity
 import android.content.Intent
 import com.spotify.sdk.android.auth.AuthorizationClient
-import com.youssefraafatnasry.otto.BuildConfig
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
+import dev.yrn.otto.BuildConfig
 import okhttp3.*
 import java.io.IOException
 
-object SpotifyAPI {
-
+object SpotifyService {
     lateinit var ACCESS_TOKEN: String
+
     private const val AUTH_REQUEST_CODE = 0x10
     private const val CLIENT_ID = "d4fcf53185d04097be9df720025c57c4"
 

@@ -1,7 +1,6 @@
-package com.youssefraafatnasry.otto.models
+package dev.yrn.otto.models
 
 object Template {
-
     class Options(val exclude: String = "") {
         override fun toString(): String {
             return "exclude: '$exclude'"
@@ -13,7 +12,6 @@ object Template {
     const val CMD_RESULT = "{{ CMD_RESULT }}"
 
     fun replace(reply: String, inputs: HashMap<String, String?>, options: Options?): String {
-
         var copy = reply
 
         inputs.forEach { (k, v) ->
@@ -26,5 +24,4 @@ object Template {
 
         return copy
     }
-
 }

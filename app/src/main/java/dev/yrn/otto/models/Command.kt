@@ -1,16 +1,15 @@
-package com.youssefraafatnasry.otto.models
+package dev.yrn.otto.models
 
 import android.media.AudioManager
 import android.media.ToneGenerator
-import com.youssefraafatnasry.otto.util.SpotifyAPI
+import dev.yrn.otto.service.SpotifyService
 
 enum class Command {
-
     ADD_TRACK_TO_FAV {
         override fun execute(inputs: HashMap<String, String?>): String? {
-            val trackId =
-                SpotifyAPI.getTrackId(inputs[Template.TEXT].toString())
-            SpotifyAPI.likeTrack(trackId)
+            val text = inputs[Template.TEXT].toString()
+            val trackId = SpotifyService.getTrackId(text)
+            SpotifyService.likeTrack(trackId)
             return null
         }
     },
@@ -24,5 +23,4 @@ enum class Command {
     };
 
     abstract fun execute(inputs: HashMap<String, String?>): String?
-
 }
