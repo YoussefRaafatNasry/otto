@@ -1,4 +1,4 @@
-package dev.yrn.otto.ui
+package dev.yrn.otto.ui.activities
 
 import android.util.Log
 import com.adamratzman.spotify.SpotifyImplicitGrantApi
