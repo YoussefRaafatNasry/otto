@@ -1,5 +1,6 @@
 package dev.yrn.otto.models
 
+import android.content.Context
 import dev.yrn.otto.Config
 
 data class ReplyRule(
@@ -10,8 +11,8 @@ data class ReplyRule(
 ) {
     val regex = Regex(pattern, setOf(RegexOption.IGNORE_CASE, RegexOption.DOT_MATCHES_ALL))
 
-    fun processReply(inputs: HashMap<String, String?>): String {
-        inputs[Template.CMD_RESULT] = command?.execute(inputs)
+    fun processReply(context: Context, inputs: HashMap<String, String?>): String {
+        inputs[Template.CMD_RESULT] = command?.execute(context, inputs)
         val reply = Template.replace(replies.random(), inputs, options)
         return Config.PREFIX + reply + Config.POSTFIX
     }

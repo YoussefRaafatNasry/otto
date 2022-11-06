@@ -22,11 +22,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.NotificationCompat
 import androidx.core.app.RemoteInput
+import com.adamratzman.spotify.auth.implicit.startSpotifyImplicitLoginActivity
 import dev.yrn.otto.BuildConfig
 import dev.yrn.otto.R
 import dev.yrn.otto.service.AutoReplyService
 import dev.yrn.otto.service.MainTileService
-import dev.yrn.otto.service.SpotifyService
 import dev.yrn.otto.ui.theme.OttoTheme
 
 
@@ -48,11 +48,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intent)
-        SpotifyService.initAccessToken(requestCode, resultCode, intent)
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -90,7 +85,7 @@ fun DebuggerPage(activity: Activity) {
         }
         Row {
             IconButton(onClick = {
-                SpotifyService.authenticateSpotify(activity)
+                activity.startSpotifyImplicitLoginActivity<SpotifyLoginActivity>()
             }) {
                 Icon(
                     painterResource(R.drawable.ic_spotify),

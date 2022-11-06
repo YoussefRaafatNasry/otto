@@ -41,7 +41,9 @@ class AutoReplyService : NotificationListenerService() {
         val text = extras.get(NotificationCompat.EXTRA_TEXT).toString()
         val name = extras.get(NotificationCompat.EXTRA_TITLE).toString().substringBefore(" ")
         val rule = Config.RULES.firstOrNull { text matches it.regex } ?: return
+
         val reply = rule.processReply(
+            applicationContext,
             hashMapOf(
                 Template.TEXT to text,
                 Template.NAME to name
