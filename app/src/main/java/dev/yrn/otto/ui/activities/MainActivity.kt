@@ -171,6 +171,8 @@ fun DebuggerPage(reply: String?) {
                 }
             )
         }
+
+        Text(BuildConfig.VERSION_NAME)
     }
 }
 
