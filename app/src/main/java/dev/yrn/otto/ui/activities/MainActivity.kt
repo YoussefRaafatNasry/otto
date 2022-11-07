@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -94,6 +95,21 @@ fun DebuggerPage(reply: String?) {
                 readOnly = true,
                 value = reply ?: "",
                 onValueChange = { },
+                trailingIcon = {
+                    IconButton(
+                        onClick = {
+                            activity.startActivity(
+                                Intent(
+                                    activity,
+                                    ConfigActivity::class.java
+                                )
+                            )
+                        }
+                    ) {
+                        Icon(Icons.Filled.Settings, "Config")
+                    }
+                }
+
             )
 
         }

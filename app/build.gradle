@@ -12,7 +12,7 @@ android {
         minSdk 31
         targetSdk 32
         versionCode 2
-        versionName "Ox7D4"
+        versionName "Ox7D5"
 
         buildConfigField "String", "WEBSITE", '"https://youssefraafatnasry.github.io/otto/"'
         buildConfigField "String", "SPOTIFY_CLIENT_ID", '"d4fcf53185d04097be9df720025c57c4"'
