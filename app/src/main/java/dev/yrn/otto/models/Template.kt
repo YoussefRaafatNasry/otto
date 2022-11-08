@@ -1,27 +1,12 @@
 package dev.yrn.otto.models
 
 object Template {
-    class Options(val exclude: String = "") {
-        override fun toString(): String {
-            return "exclude: '$exclude'"
-        }
-    }
+    /// Name from notification title
+    fun name() = "{{ NAME }}"
 
-    const val TEXT = "{{ TEXT }}"
-    const val NAME = "{{ NAME }}"
-    const val CMD_RESULT = "{{ CMD_RESULT }}"
+    /// Text from notification body
+    fun text() = "{{ TEXT }}"
 
-    fun replace(reply: String, inputs: HashMap<String, String?>, options: Options?): String {
-        var copy = reply
-
-        inputs.forEach { (k, v) ->
-            copy = copy.replace(k, v.toString(), true)
-        }
-
-        if (options != null) {
-            copy = copy.replace(options.exclude, "", true)
-        }
-
-        return copy
-    }
+    /// Group from pattern match
+    fun group(index: Int) = "{{ $index }}"
 }

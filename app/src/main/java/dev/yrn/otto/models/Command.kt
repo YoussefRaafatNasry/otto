@@ -9,9 +9,7 @@ import kotlinx.coroutines.*
 
 enum class Command {
     ADD_TRACK_TO_FAV {
-        override fun execute(context: Context, inputs: HashMap<String, String?>): String? {
-            val text = inputs[Template.TEXT].toString()
-
+        override fun execute(context: Context, text: String) {
             // Support Spotify URIs (...track:id)
             // and HTTP Links (...track/id)
             val regex = Regex("track[:/].{22}")
@@ -25,18 +23,15 @@ enum class Command {
                     api?.library?.add(LibraryType.TRACK, trackId)
                 }
             }
-
-            return null
         }
     },
 
     NOTIFY_OWNER {
-        override fun execute(context: Context, inputs: HashMap<String, String?>): String? {
+        override fun execute(context: Context, text: String) {
             ToneGenerator(AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME)
                 .startTone(ToneGenerator.TONE_CDMA_PIP, 1000)
-            return null
         }
     };
 
-    abstract fun execute(context: Context, inputs: HashMap<String, String?>): String?
+    abstract fun execute(context: Context, text: String)
 }
