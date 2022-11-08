@@ -7,7 +7,7 @@ import dev.yrn.otto.models.Template
 
 object Config {
     const val CREATOR = "Youssef"
-    const val PREFIX = "*⦿:* "
+    const val PREFIX = "⦿: "
     const val POSTFIX = ""
 
     var PACKAGES = arrayOf(

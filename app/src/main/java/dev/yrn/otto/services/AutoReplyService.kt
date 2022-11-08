@@ -3,8 +3,7 @@ package dev.yrn.otto.services
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.Notification
-import android.app.Notification.EXTRA_TEXT
-import android.app.Notification.EXTRA_TITLE
+import android.app.Notification.*
 import android.app.RemoteInput
 import android.content.Intent
 import android.service.notification.NotificationListenerService
@@ -28,18 +27,21 @@ class AutoReplyService : NotificationListenerService() {
 
         // Ignore un-reply-able notifications
         val notification = sbn.notification
-        val replyAction = notification.actions.firstOrNull {
+        val replyAction = notification?.actions?.firstOrNull {
             it?.remoteInputs != null && it.title.contains("reply", true)
         } ?: return
 
         reply(notification, replyAction)
     }
 
-    private fun reply(notification: Notification, action: Notification.Action) {
+    private fun reply(notification: Notification, action: Action) {
         val extras = notification.extras
         val text = extras.get(EXTRA_TEXT).toString()
         val name = extras.get(EXTRA_TITLE).toString().substringBefore(" ")
         val rule = Config.RULES.firstOrNull { text matches it.regex } ?: return
+
+        // Stop otto from recursively replying to itself
+        if (text.contains(Config.PREFIX)) return
 
         val intent = Intent()
         val reply = rule.processReply(
